@@ -23,10 +23,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install requests  # 只需安装需要的依赖，此处假设使用 requests 发送 HTTP 请求
 
-      - name: 执行Python脚本恢复vless服务并发送Telegram消息
+      - name: 执行Python脚本恢复vmess服务并发送Telegram消息
         env:
           ACCOUNTS_JSON: ${{ secrets.ACCOUNTS_JSON }}
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
-          python3 vless/recover_vless.py
+          python3 vmess/recover_vmess.py
