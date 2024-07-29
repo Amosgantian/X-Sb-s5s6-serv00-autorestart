@@ -32,9 +32,12 @@ if not accounts_json or not telegram_token or not telegram_chat_id:
     send_telegram_message(telegram_token, telegram_chat_id, error_message)
     exit(1)
 
+print("环境变量已成功加载")
+
 # 检查并解析 JSON 字符串
 try:
     servers = json.loads(accounts_json)
+    print("ACCOUNTS_JSON 解析成功")
 except json.JSONDecodeError:
     error_message = "ACCOUNTS_JSON 参数格式错误"
     print(error_message)
