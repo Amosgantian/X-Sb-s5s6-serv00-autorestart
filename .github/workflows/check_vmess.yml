@@ -16,7 +16,7 @@ jobs:
       - name: 设置Python环境
         uses: actions/setup-python@v4
         with:
-          python-version: '3.x'  # 替换为您需要的 Python 版本
+          python-version: '3.x'
 
       - name: 安装依赖
         run: |
