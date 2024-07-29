@@ -37,8 +37,14 @@ except json.JSONDecodeError:
 # 初始化汇总消息
 summary_message = "serv00-vmess 恢复操作结果：\n"
 
-# 默认恢复命令
-default_restore_command = "/home/yahaigene/domains/xray/start.sh >/dev/null 2>&1"
+# 默认恢复命令列表
+default_restore_commands = [
+    "nohup /home/amoz/domains/xray/start.sh >/dev/null 2>&1 &",
+    "nohup /home/amoz/.npm-global/bin/pm2 start /home/amoz/domains/poland.yhgenedit.us.kg/vless/app.js --name vless &",
+    "nohup /home/yahaigene/domains/xray/start.sh >/dev/null 2>&1 &",
+    "nohup /home/menghunke/domains/s6.yahaibiology.us.kg/xray/start.sh > /dev/null 2>&1 &"
+    
+]
 
 # 遍历服务器列表并执行恢复操作
 for server in servers:
@@ -46,17 +52,22 @@ for server in servers:
     port = server['port']
     username = server['username']
     password = server['password']
-    cron_command = server.get('cron', default_restore_command)
+    cron_commands = server.get('cron', default_restore_commands)
 
     print(f"连接到 {host}...")
 
+    # 如果 cron 命令是字符串，转换为列表
+    if isinstance(cron_commands, str):
+        cron_commands = [cron_commands]
+
     # 执行恢复命令（这里假设使用 SSH 连接和密码认证）
-    restore_command = f"sshpass -p '{password}' ssh -o StrictHostKeyChecking=no -p {port} {username}@{host} '{cron_command}'"
-    try:
-        output = subprocess.check_output(restore_command, shell=True, stderr=subprocess.STDOUT)
-        summary_message += f"\n成功恢复 {host} 上的 vmess 服务：\n{output.decode('utf-8')}"
-    except subprocess.CalledProcessError as e:
-        summary_message += f"\n也恢复 {host} 上的 vmess 服务：\n{e.output.decode('utf-8')}"
+    for command in cron_commands:
+        restore_command = f"sshpass -p '{password}' ssh -o StrictHostKeyChecking=no -p {port} {username}@{host} '{command}'"
+        try:
+            output = subprocess.check_output(restore_command, shell=True, stderr=subprocess.STDOUT)
+            summary_message += f"\n成功恢复 {host} 上的 vmess 服务：\n{output.decode('utf-8')}"
+        except subprocess.CalledProcessError as e:
+            summary_message += f"\n未能恢复 {host} 上的 vmess 服务：\n{e.output.decode('utf-8')}"
 
 # 发送汇总消息到 Telegram
 send_telegram_message(telegram_token, telegram_chat_id, summary_message)
