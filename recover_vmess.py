@@ -25,6 +25,13 @@ accounts_json = os.getenv('ACCOUNTS_JSON')
 telegram_token = os.getenv('TELEGRAM_TOKEN')
 telegram_chat_id = os.getenv('TELEGRAM_CHAT_ID')
 
+# 验证环境变量是否存在
+if not accounts_json or not telegram_token or not telegram_chat_id:
+    error_message = "环境变量缺失: 请检查 ACCOUNTS_JSON, TELEGRAM_TOKEN 和 TELEGRAM_CHAT_ID"
+    print(error_message)
+    send_telegram_message(telegram_token, telegram_chat_id, error_message)
+    exit(1)
+
 # 检查并解析 JSON 字符串
 try:
     servers = json.loads(accounts_json)
@@ -42,8 +49,7 @@ default_restore_commands = [
     "nohup /home/amoz/domains/xray/start.sh >/dev/null 2>&1 &",
     "nohup /home/amoz/.npm-global/bin/pm2 start /home/amoz/domains/poland.yhgenedit.us.kg/vless/app.js --name vless &",
     "nohup /home/yahaigene/domains/xray/start.sh >/dev/null 2>&1 &",
-    "nohup /home/menghunke/domains/s6.yahaibiology.us.kg/xray/start.sh > /dev/null 2>&1 &"
-    
+    "nohup /home/menghunke/domains/s6.yahaibiology.us.kg/xray/start.sh >/dev/null 2>&1 &"
 ]
 
 # 遍历服务器列表并执行恢复操作
@@ -63,11 +69,18 @@ for server in servers:
     # 执行恢复命令（这里假设使用 SSH 连接和密码认证）
     for command in cron_commands:
         restore_command = f"sshpass -p '{password}' ssh -o StrictHostKeyChecking=no -p {port} {username}@{host} '{command}'"
+        print(f"执行命令: {restore_command}")  # 添加日志
         try:
             output = subprocess.check_output(restore_command, shell=True, stderr=subprocess.STDOUT)
             summary_message += f"\n成功恢复 {host} 上的 vmess 服务：\n{output.decode('utf-8')}"
         except subprocess.CalledProcessError as e:
-            summary_message += f"\n未能恢复 {host} 上的 vmess 服务：\n{e.output.decode('utf-8')}"
+            error_output = e.output.decode('utf-8')
+            print(f"执行命令失败: {restore_command}\n错误信息: {error_output}")  # 添加日志
+            summary_message += f"\n未能恢复 {host} 上的 vmess 服务：\n{error_output}"
+        except Exception as e:
+            error_message = str(e)
+            print(f"未知错误: {error_message}")  # 捕获其他异常
+            summary_message += f"\n未能恢复 {host} 上的 vmess 服务：\n{error_message}"
 
 # 发送汇总消息到 Telegram
 send_telegram_message(telegram_token, telegram_chat_id, summary_message)
