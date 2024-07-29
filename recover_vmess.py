@@ -38,8 +38,8 @@ print("环境变量已成功加载")
 try:
     servers = json.loads(accounts_json)
     print("ACCOUNTS_JSON 解析成功")
-except json.JSONDecodeError:
-    error_message = "ACCOUNTS_JSON 参数格式错误"
+except json.JSONDecodeError as e:
+    error_message = f"ACCOUNTS_JSON 参数格式错误: {str(e)}"
     print(error_message)
     send_telegram_message(telegram_token, telegram_chat_id, error_message)
     exit(1)
