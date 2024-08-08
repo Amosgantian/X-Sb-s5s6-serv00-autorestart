@@ -52,6 +52,7 @@ default_restore_commands = [
     "nohup /home/amoz/domains/xray/start.sh >/dev/null 2>&1 &",
     "nohup /home/amoz/.npm-global/bin/pm2 start /home/amoz/domains/poland.yhgenedit.us.kg/vless/app.js --name vless &",
     "nohup /home/yahaigene/domains/xray/start.sh >/dev/null 2>&1 &",
+    "nohup /home/yahaigene/.s5/s5 -c /home/yahaigene/.s5/config.json >/dev/null 2>&1 &",
     "nohup /home/menghunke/domains/s6.yahaibiology.us.kg/xray/start.sh >/dev/null 2>&1 &"
 ]
 
