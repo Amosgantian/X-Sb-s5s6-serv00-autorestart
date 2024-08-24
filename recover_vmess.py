@@ -50,8 +50,8 @@ summary_message = "serv00-vmess 恢复操作结果：\n"
 # 默认恢复命令列表
 default_restore_commands = [
     "pgrep -x dashboard > /dev/null || nohup /home/amoz/.npm-global/bin/pm2 start /home/amoz/nezhapanel/dashboard --name dashboard --cwd /home/amoz/nezhapanel &",
-    "pgrep -x dashboard > /dev/null || nohup /home/amoz/.npm-global/bin/pm2 start /home/amoz/nezhapanel/agent.sh &",
-    "pgrep -x vless > /dev/null || nohup /home/amoz/.npm-global/bin/pm2 start /home/amoz/domains/poland.yhgenedit.us.kg/vless/app.js --name vless &",
+    "pgrep -x agent > /dev/null || nohup /home/amoz/.npm-global/bin/pm2 start /home/amoz/nezhapanel/agent.sh &",
+    "pgrep -f 'node /home/amoz/domains/poland.yhgenedit.us.kg/vless/app.js' > /dev/null || nohup /home/amoz/.npm-global/bin/pm2 start /home/amoz/domains/poland.yhgenedit.us.kg/vless/app.js --name vless &",
     "nohup /home/yahaigene/.npm-global/bin/pm2 start /home/yahaigene/domains/xray/start.sh >/dev/null 2>&1 &",
     "nohup /home/menghunke/sb_00.sh >/dev/null 2>&1 &"
 ]
