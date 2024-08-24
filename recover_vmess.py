@@ -49,11 +49,11 @@ summary_message = "serv00-vmess 恢复操作结果：\n"
 
 # 默认恢复命令列表
 default_restore_commands = [
-    "nohup /home/amoz/.npm-global/bin/pm2 start /home/amoz/domains/xray/start.sh >/dev/null 2>&1 &",
+    "nohup /home/amoz/.npm-global/bin/pm2 start /home/amoz/nezhapanel/dashboard &",
+    "nohup /home/amoz/.npm-global/bin/pm2 start /home/amoz/nezhapanel/agent.sh &",
     "nohup /home/amoz/.npm-global/bin/pm2 start /home/amoz/domains/poland.yhgenedit.us.kg/vless/app.js --name vless &",
     "nohup /home/yahaigene/.npm-global/bin/pm2 start /home/yahaigene/domains/xray/start.sh >/dev/null 2>&1 &",
     "nohup /home/menghunke/sb_00.sh >/dev/null 2>&1 &"
-   
 ]
 
 # 遍历服务器列表并执行恢复操作
