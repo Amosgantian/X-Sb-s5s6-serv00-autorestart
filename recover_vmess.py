@@ -52,7 +52,7 @@ default_restore_commands = [
     "pgrep -x dashboard > /dev/null || $HOME/.npm-global/bin/pm2 start $HOME/nezhapanel/dashboard --name dashboard --cwd $HOME/nezhapanel",
     "pgrep -x agent > /dev/null || $HOME/.npm-global/bin/pm2 start $HOME/nezhapanel/agent.sh ",
     "ps aux | grep '[n]ode $HOME/domains/poland.yhgenedit.us.kg/vless/app.js' > /dev/null || $HOME/.npm-global/bin/pm2 start $HOME/domains/poland.yhgenedit.us.kg/vless/app.js --name vless",
-    "$HOME/.npm-global/bin/pm2 start $HOME/domains/xray/start.sh >/dev/null 2>&1",
+    "$HOME/xauto/checkx.sh >/dev/null 2>&1 &",
     "ps aux | grep -v grep | grep run > /dev/null || $HOME/sb_00.sh >/dev/null 2>&1 &",
     "ps aux | grep -v grep | grep nezha-agent > /dev/null || nohup $HOME/nezha-agent/nezha-agent.sh >/dev/null 2>&1 &"
 ]
