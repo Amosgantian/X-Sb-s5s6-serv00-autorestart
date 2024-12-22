@@ -54,7 +54,7 @@ default_restore_commands = [
     "ps aux | grep '[n]ode $HOME/domains/poland.yhgenedit.us.kg/vless/app.js' > /dev/null || $HOME/.npm-global/bin/pm2 start $HOME/domains/poland.yhgenedit.us.kg/vless/app.js --name vless",
     "$HOME/xauto/checkx.sh >/dev/null 2>&1 &",
     "ps aux | grep -v grep | grep run > /dev/null || $HOME/sb_00.sh >/dev/null 2>&1 &",
-    "(ps aux | grep -v grep | grep nezha-agent > /dev/null) && (ps aux | grep -v grep | grep s6sb > /dev/null) && (ps aux | grep -v grep | grep s6cf > /dev/null) || nohup $HOME/sbyongg/s6yhg-nezha-sb.sh >/dev/null 2>&1 &"
+    "(ps aux | grep -v grep | grep nezha-agent > /dev/null) && (ps aux | grep -v grep | grep s6sb > /dev/null) && (ps aux | grep -v grep | grep s6cf > /dev/null) || $HOME/sbyongg/s6yhg-nezha-sb.sh >/dev/null 2>&1 &"
 ]
 
 # 遍历服务器列表并执行恢复操作
