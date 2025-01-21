@@ -49,9 +49,9 @@ summary_message = "serv00-vmess 恢复操作结果：\n"
 
 # 默认恢复命令列表
 default_restore_commands = [
-    "pgrep -x dashboard > /dev/null || $HOME/.npm-global/bin/pm2 start $HOME/nezhapanel/dashboard --name dashboard --cwd $HOME/nezhapanel",
-    "pgrep -x agent > /dev/null || $HOME/.npm-global/bin/pm2 start $HOME/nezhapanel/agent.sh ",
-    "ps aux | grep '[n]ode $HOME/domains/poland.yhgenedit.us.kg/vless/app.js' > /dev/null || $HOME/.npm-global/bin/pm2 start $HOME/domains/poland.yhgenedit.us.kg/vless/app.js --name vless",
+    "pgrep -x dashboard > /dev/null || nohup $HOME/nezhapanel/dashboard run -c $HOME/nezhapanel/data/config.yaml >/dev/null 2>&1 &",
+    "pgrep -x agent > /dev/null || nohup $HOME/nezhapanel/agent.sh >/dev/null 2>&1 &",
+    "ps aux | grep '[n]ode $HOME/domains/poland.yhgenedit.us.kg/vless/app.js' > /dev/null || nohup node $HOME/domains/poland.yhgenedit.us.kg/vless/app.js >/dev/null 2>&1 &",
     "$HOME/xauto/checkx.sh >/dev/null 2>&1 &",
     "ps aux | grep -v grep | grep run > /dev/null || $HOME/sb_00.sh >/dev/null 2>&1 &",
     "ps aux | grep -v grep | grep nezha-agent > /dev/null || nohup $HOME/nezha-agent/nezha-agent.sh >/dev/null 2>&1 &"
