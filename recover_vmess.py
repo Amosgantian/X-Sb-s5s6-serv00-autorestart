@@ -51,7 +51,7 @@ summary_message = "serv00-vmess 恢复操作结果：\n"
 default_restore_commands = [
     "$HOME/autocheck.sh >/dev/null 2>&1 &",
     "$HOME/xauto/checkx.sh >/dev/null 2>&1 &",
-    "nohup $HOME/nezha-agent/nezha-agent.sh >/dev/null 2>&1 &"
+    "$HOME/nezha-agent/nezha-agent.sh >/dev/null 2>&1 &"
 ]
 
 # 遍历服务器列表并执行恢复操作
