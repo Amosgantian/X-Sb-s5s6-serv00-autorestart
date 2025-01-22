@@ -7,7 +7,7 @@ on:
 
 jobs:
   restore_and_notify:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04  # 指定使用 Ubuntu 22.04，避免使用 ubuntu-latest
 
     steps:
       - name: Checkout repository
