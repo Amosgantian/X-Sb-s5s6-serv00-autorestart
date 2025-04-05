@@ -49,9 +49,8 @@ summary_message = "serv00-vmess 恢复操作结果：\n"
 
 # 默认恢复命令列表
 default_restore_commands = [
-    "$HOME/autocheck.sh >/dev/null 2>&1 &",
-    "$HOME/xauto/checkx.sh >/dev/null 2>&1 &",
-    "$HOME/agent.sh >/dev/null 2>&1 &"
+    "$HOME/autocheck5sweb >/dev/null 2>&1 &",
+    "$HOME/xauto/check6sweb.sh >/dev/null 2>&1 &"
 ]
 
 # 遍历服务器列表并执行恢复操作
