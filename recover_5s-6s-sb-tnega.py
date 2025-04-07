@@ -73,15 +73,15 @@ for server in servers:
         print(f"执行命令: {restore_command}")  # 添加日志
         try:
             output = subprocess.check_output(restore_command, shell=True, stderr=subprocess.STDOUT)
-            summary_message += f"\n成功恢复 {host} 上的 vmess 服务：\n{output.decode('utf-8')}"
+            summary_message += f"\n成功恢复 {host} 上的 sb-tnega 服务：\n{output.decode('utf-8')}"
         except subprocess.CalledProcessError as e:
             error_output = e.output.decode('utf-8')
             print(f"执行命令失败: {restore_command}\n错误信息: {error_output}")  # 添加日志
-            summary_message += f"\n未能恢复 {host} 上的 vmess 服务：\n{error_output}"
+            summary_message += f"\n未能恢复 {host} 上的 sb-tnega 服务：\n{error_output}"
         except Exception as e:
             error_message = str(e)
             print(f"未知错误: {error_message}")  # 捕获其他异常
-            summary_message += f"\n未能恢复 {host} 上的 vmess 服务：\n{error_message}"
+            summary_message += f"\n未能恢复 {host} 上的 sb-tnega 服务：\n{error_message}"
 
 # 发送汇总消息到 Telegram
 send_telegram_message(telegram_token, telegram_chat_id, summary_message)
